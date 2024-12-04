@@ -8,6 +8,8 @@ const rootDir = require('../util/path')
 
 const bodyParsed = require('body-parser')
 
+const products = []
+
 router.use(bodyParsed.urlencoded({extended:true}))
 
 router.get('/add-product',(req,res,next)=>{
@@ -15,8 +17,9 @@ router.get('/add-product',(req,res,next)=>{
 })
 
 router.post('/add-product',(req,res,next)=>{
-    console.log(req.body)
+    products.push({title:req.body.title})
     res.redirect('/')
 })
 
-module.exports = router;
+exports.router = router
+exports.products = products
