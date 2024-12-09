@@ -13,7 +13,7 @@ const products = []
 router.use(bodyParsed.urlencoded({extended:true}))
 
 router.get('/add-product',(req,res,next)=>{
-    res.sendFile(path.join(rootDir,'views','add-product.html'))
+    res.render('add-product',{path:'/admin/add-product',pageTitle:'Add Product', formsCSS: true, productCSS: true, aciveAddProducts: true})
 })
 
 router.post('/add-product',(req,res,next)=>{
