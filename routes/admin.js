@@ -6,20 +6,14 @@ const router = express.Router()
 
 const rootDir = require('../util/path')
 
-const bodyParsed = require('body-parser')
+const productController = require('../controller/products')
 
-const products = []
+const bodyParsed = require('body-parser')
 
 router.use(bodyParsed.urlencoded({extended:true}))
 
-router.get('/add-product',(req,res,next)=>{
-    res.render('add-product',{path:'/admin/add-product',pageTitle:'Add Product', formsCSS: true, productCSS: true, aciveAddProducts: true})
-})
+router.get('/add-product', productController.getAddProduct)
 
-router.post('/add-product',(req,res,next)=>{
-    products.push({title:req.body.title})
-    res.redirect('/')
-})
+router.post('/add-product', productController.postAddProduct)
 
-exports.router = router
-exports.products = products
+module.exports = router
