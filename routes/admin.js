@@ -1,23 +1,24 @@
-const express = require('express')
+const path = require('path');
 
-const path = require('path')
+const express = require('express');
 
-const router = express.Router()
+const adminController = require('../controllers/admin');
 
-const rootDir = require('../util/path')
+const router = express.Router();
 
-const adminController = require('../controller/admin')
+// /admin/add-product => GET
+router.get('/add-product', adminController.getAddProduct);
 
-const bodyParsed = require('body-parser')
+// /admin/products => GET
+router.get('/products', adminController.getProducts);
 
-router.use(bodyParsed.urlencoded({extended:true}))
+// /admin/add-product => POST
+router.post('/add-product', adminController.postAddProduct);
 
-router.get('/add-product', adminController.getAddProduct)
+router.get('/edit-product/:productId', adminController.getEditProduct);
 
-router.get('/products', adminController.getProducts)
+router.post('/edit-product', adminController.postEditProduct);
 
-router.post('/add-product', adminController.postAddProduct)
+router.post('/delete-product', adminController.postDeleteProduct);
 
-router.get('/edit-product', adminController.getEditProduct)
-
-module.exports = router
+module.exports = router;
